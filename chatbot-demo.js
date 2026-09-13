@@ -93,7 +93,6 @@ function addMenuGallery() {
 
   body.appendChild(el);
   body.scrollTop = body.scrollHeight;
-  history.push({ role: "assistant", content: "[Se mostró la galería de fotos del menú]" });
 }
 
 const PHOTO_KEYWORDS = /\bfoto|imagen|imágenes|fotos\b/i;
