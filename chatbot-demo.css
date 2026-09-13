@@ -156,6 +156,10 @@ section h2 {
   z-index: 30;
 }
 
+.chat-launcher[hidden] {
+  display: none;
+}
+
 .chat-launcher:hover {
   filter: brightness(1.08);
 }
