@@ -126,6 +126,22 @@ section h2 {
   flex: none;
 }
 
+.menu-row-photo {
+  align-items: center;
+}
+
+.menu-row-photo span:not(.price) {
+  flex: 1;
+}
+
+.menu-photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
