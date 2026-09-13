@@ -20,6 +20,39 @@
       <p id="gateError" class="gate-error" hidden></p>
     </div>
 
+    <div id="stats" class="stats" hidden>
+      <div class="tiles">
+        <div class="tile">
+          <span class="tile-value" id="statTotal">0</span>
+          <span class="tile-label">Conversaciones guardadas</span>
+        </div>
+        <div class="tile">
+          <span class="tile-value" id="statToday">0</span>
+          <span class="tile-label">Hoy</span>
+        </div>
+      </div>
+
+      <section class="chart-block">
+        <h2>Conversaciones por día <span class="chart-sub">(últimos 14 días)</span></h2>
+        <div class="chart-scroll">
+          <div class="bar-chart" id="dayChart"></div>
+        </div>
+      </section>
+
+      <section class="chart-block">
+        <h2>Hora del día más activa</h2>
+        <div class="chart-scroll">
+          <div class="bar-chart hour-chart" id="hourChart"></div>
+        </div>
+      </section>
+
+      <section class="chart-block">
+        <h2>Palabras más mencionadas</h2>
+        <ul class="keyword-list" id="keywordList"></ul>
+      </section>
+    </div>
+
+    <h2 class="list-heading" id="listHeading" hidden>Historial de conversaciones</h2>
     <div id="list" class="list" hidden></div>
   </div>
 

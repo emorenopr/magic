@@ -1,8 +1,77 @@
 const gate = document.getElementById("gate");
+const stats = document.getElementById("stats");
+const listHeading = document.getElementById("listHeading");
 const list = document.getElementById("list");
 const passwordInput = document.getElementById("passwordInput");
 const enterBtn = document.getElementById("enterBtn");
 const gateError = document.getElementById("gateError");
+const statTotal = document.getElementById("statTotal");
+const statToday = document.getElementById("statToday");
+const dayChart = document.getElementById("dayChart");
+const hourChart = document.getElementById("hourChart");
+const keywordList = document.getElementById("keywordList");
+
+const DAY_LABELS = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
+
+function renderBarChart(container, values, labelFn, tooltipFn) {
+  const max = Math.max(1, ...values.map((v) => (typeof v === "number" ? v : v.count)));
+  container.innerHTML = values
+    .map((v, i) => {
+      const count = typeof v === "number" ? v : v.count;
+      const pct = Math.round((count / max) * 100);
+      const label = labelFn(v, i);
+      const tooltip = escapeHtml(tooltipFn(v, i));
+      return `
+        <div class="bar-col">
+          <div class="bar" style="height:${pct}%" title="${tooltip}"></div>
+          <span class="bar-label">${label}</span>
+        </div>`;
+    })
+    .join("");
+}
+
+function renderStats(s) {
+  if (!s) {
+    stats.hidden = true;
+    return;
+  }
+
+  statTotal.textContent = s.total;
+  statToday.textContent = s.today;
+
+  renderBarChart(
+    dayChart,
+    s.byDate,
+    (d) => d.date.slice(8, 10),
+    (d) => {
+      const day = new Date(d.date + "T12:00:00");
+      return `${DAY_LABELS[day.getDay()]} ${d.date}: ${d.count} conversaciones`;
+    },
+  );
+
+  renderBarChart(
+    hourChart,
+    s.byHour,
+    (_count, hour) => (hour % 3 === 0 ? hour + "h" : ""),
+    (count, hour) => `${hour}:00 - ${count} conversaciones`,
+  );
+
+  if (!s.topKeywords || s.topKeywords.length === 0) {
+    keywordList.innerHTML = '<li class="keyword-empty">Aún no hay suficientes datos.</li>';
+  } else {
+    keywordList.innerHTML = s.topKeywords
+      .map(
+        (k) => `
+        <li>
+          <span class="word">${escapeHtml(k.word)}</span>
+          <span class="count">${k.count}</span>
+        </li>`,
+      )
+      .join("");
+  }
+
+  stats.hidden = false;
+}
 
 function escapeHtml(str) {
   const div = document.createElement("div");
@@ -55,8 +124,10 @@ async function loadConversations(password) {
 
     const data = await res.json();
     sessionStorage.setItem("adminPassword", password);
+    renderStats(data.stats);
     renderConversations(data.conversations);
     gate.hidden = true;
+    listHeading.hidden = false;
     list.hidden = false;
   } catch {
     gateError.textContent = "No se pudo conectar con el servidor.";

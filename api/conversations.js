@@ -1,4 +1,5 @@
 const { getRedis } = require("../lib/redis");
+const { computeStats } = require("../lib/stats");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -20,12 +21,12 @@ module.exports = async (req, res) => {
 
   const redis = getRedis();
   if (!redis) {
-    res.status(200).json({ conversations: [] });
+    res.status(200).json({ conversations: [], stats: null });
     return;
   }
 
   try {
-    const raw = await redis.lrange("chat_logs", 0, 199);
+    const raw = await redis.lrange("chat_logs", 0, 499);
     const conversations = raw
       .map((entry) => {
         try {
@@ -35,7 +36,8 @@ module.exports = async (req, res) => {
         }
       })
       .filter(Boolean);
-    res.status(200).json({ conversations });
+    const stats = computeStats(conversations);
+    res.status(200).json({ conversations: conversations.slice(0, 199), stats });
   } catch (error) {
     console.error("Conversations error:", error);
     res.status(502).json({ error: "No se pudieron cargar las conversaciones." });
