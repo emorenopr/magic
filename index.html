@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bola Mágica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital@1&family=Manrope:wght@500;600;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <h1>🔮 Bola Mágica</h1>
-    <p class="subtitle">Hazle una pregunta y descubre tu destino</p>
+    <header class="masthead">
+      <h1>🔮 Bola Mágica</h1>
+      <div class="divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+      <p class="subtitle">Formula tu pregunta y deja que el oráculo responda</p>
+    </header>
 
     <div class="ball" id="ball">
       <div class="ball-window" id="ballWindow">
@@ -17,8 +22,11 @@
       </div>
     </div>
 
-    <input type="text" id="question" placeholder="Escribe tu pregunta..." />
-    <button id="askButton">Preguntar</button>
+    <form id="oracleForm" class="oracle-form">
+      <label for="question" class="sr-only">Tu pregunta</label>
+      <input type="text" id="question" placeholder="¿Qué quieres saber?" autocomplete="off" />
+      <button type="submit" id="askButton">Consultar</button>
+    </form>
   </main>
 
   <script src="script.js"></script>

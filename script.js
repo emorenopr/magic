@@ -1,29 +1,32 @@
 const ANSWERS = [
-  "Sí, definitivamente",
-  "Es cierto",
-  "Sin duda alguna",
-  "Sí, puedes confiar en ello",
+  "Sí, sin ninguna duda",
+  "Las estrellas lo confirman",
+  "Cuenta con ello",
+  "El camino está despejado",
   "Todo apunta a que sí",
-  "Las señales dicen que sí",
+  "Es un buen presagio",
   "Muy probable",
-  "Buenas perspectivas",
-  "Pregunta de nuevo más tarde",
-  "Mejor no te lo digo ahora",
-  "No puedo predecirlo ahora",
-  "Concéntrate y pregunta otra vez",
+  "Las señales son favorables",
+  "Pregunta de nuevo cuando la luna cambie",
+  "El oráculo guarda silencio por ahora",
+  "Aún no está escrito",
+  "Concéntrate y vuelve a preguntar",
   "No cuentes con ello",
-  "Mi respuesta es no",
-  "Mis fuentes dicen que no",
-  "Las perspectivas no son buenas",
+  "Las cartas dicen que no",
+  "Los astros lo desaconsejan",
+  "El presagio no es bueno",
   "Muy dudoso",
 ];
 
+const form = document.getElementById("oracleForm");
 const ball = document.getElementById("ball");
 const answerEl = document.getElementById("answer");
 const questionInput = document.getElementById("question");
 const askButton = document.getElementById("askButton");
 
-function ask() {
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
   if (!questionInput.value.trim()) {
     questionInput.focus();
     return;
@@ -39,11 +42,4 @@ function ask() {
     ball.classList.remove("shaking");
     askButton.disabled = false;
   }, 700);
-}
-
-askButton.addEventListener("click", ask);
-questionInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    ask();
-  }
 });
