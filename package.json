@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Demo de chatbot de atencion al cliente para comercios, con backend serverless en Vercel.",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.125.0"
+    "@anthropic-ai/sdk": "^0.125.0",
+    "@upstash/redis": "^1.38.4"
   }
 }

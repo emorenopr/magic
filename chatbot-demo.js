@@ -5,9 +5,40 @@ const body = document.getElementById("chatBody");
 const form = document.getElementById("chatForm");
 const input = document.getElementById("chatInput");
 const sendBtn = document.getElementById("chatSend");
+const onlineBadge = document.getElementById("onlineBadge");
+const onlineNum = document.getElementById("onlineNum");
 
 const history = [];
 let opened = false;
+
+function getSessionId() {
+  let id = sessionStorage.getItem("visitorSessionId");
+  if (!id) {
+    id = crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2);
+    sessionStorage.setItem("visitorSessionId", id);
+  }
+  return id;
+}
+
+async function pingPresence() {
+  try {
+    const res = await fetch("/api/presence", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId: getSessionId() }),
+    });
+    const data = await res.json();
+    if (typeof data.online === "number") {
+      onlineNum.textContent = data.online;
+      onlineBadge.hidden = false;
+    }
+  } catch {
+    // si falla, simplemente no mostramos el contador
+  }
+}
+
+pingPresence();
+setInterval(pingPresence, 15000);
 
 function addBubble(role, text) {
   const el = document.createElement("div");

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversaciones — Café Coquí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Conversaciones del chatbot</h1>
+    <p class="subtitle">Café Coquí — historial de preguntas y respuestas</p>
+
+    <div id="gate" class="gate">
+      <label for="passwordInput" class="sr-only">Contraseña</label>
+      <input type="password" id="passwordInput" placeholder="Contraseña" autocomplete="current-password" />
+      <button id="enterBtn" type="button">Entrar</button>
+      <p id="gateError" class="gate-error" hidden></p>
+    </div>
+
+    <div id="list" class="list" hidden></div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

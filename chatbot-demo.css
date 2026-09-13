@@ -45,6 +45,16 @@ body {
   padding: 4px 12px;
 }
 
+.online-badge {
+  align-self: flex-start;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: #8fd9a8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 header h1 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 800;

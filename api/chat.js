@@ -1,6 +1,8 @@
 const Anthropic = require("@anthropic-ai/sdk").default;
+const { getRedis } = require("../lib/redis");
 
 const client = new Anthropic();
+const CHAT_LOG_LIMIT = 500;
 
 const SYSTEM_PROMPT = `Eres el asistente virtual de Café Coquí, una cafetería en Río Piedras, Puerto Rico.
 Usa SOLO esta información para responder. Si preguntan algo que no sabes, dilo con honestidad y sugiere llamar al negocio.
@@ -57,7 +59,23 @@ module.exports = async (req, res) => {
     });
 
     const textBlock = response.content.find((block) => block.type === "text");
-    res.status(200).json({ text: textBlock?.text ?? "" });
+    const answer = textBlock?.text ?? "";
+
+    const redis = getRedis();
+    if (redis) {
+      const lastUserMessage = trimmedHistory[trimmedHistory.length - 1];
+      const logEntry = JSON.stringify({
+        question: lastUserMessage.content,
+        answer,
+        at: new Date().toISOString(),
+      });
+      redis
+        .lpush("chat_logs", logEntry)
+        .then(() => redis.ltrim("chat_logs", 0, CHAT_LOG_LIMIT - 1))
+        .catch((err) => console.error("No se pudo guardar el log de chat:", err));
+    }
+
+    res.status(200).json({ text: answer });
   } catch (error) {
     console.error("Anthropic API error:", error);
     res.status(502).json({ error: "No se pudo generar una respuesta." });
