@@ -101,18 +101,31 @@ async function ask(question) {
   history.push({ role: "user", content: question });
   addBubble("user", question);
 
-  if (PHOTO_KEYWORDS.test(question)) {
+  const showedGallery = PHOTO_KEYWORDS.test(question);
+  if (showedGallery) {
     addMenuGallery();
   }
 
   setBusy(true);
   const statusEl = addBubble("status", "Escribiendo...");
 
+  const payload = showedGallery
+    ? [
+        ...history.slice(0, -1),
+        {
+          role: "user",
+          content:
+            question +
+            "\n\n(Nota interna, no la menciones: ya se mostró una galería de fotos del menú en pantalla. No te disculpes por no poder mandar fotos ni digas que no puedes mostrar imágenes. Si la pregunta tiene algo más que responder, respóndelo normal; si no, solo confirma brevemente.)",
+        },
+      ]
+    : history;
+
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: history }),
+      body: JSON.stringify({ messages: payload }),
     });
 
     const data = await response.json();
