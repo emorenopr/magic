@@ -230,6 +230,92 @@ section h2 {
   padding: 4px;
 }
 
+.chat-quick {
+  padding: 10px 14px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-chip {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-family: "Karla", sans-serif;
+  cursor: pointer;
+}
+
+.quick-chip:hover {
+  border-color: var(--accent);
+}
+
+.bubble.gallery {
+  max-width: 100%;
+  background: none;
+  padding: 0;
+  align-self: stretch;
+}
+
+.menu-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.menu-tile {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+
+.menu-tile img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-tile .tile-icon {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: var(--surface);
+}
+
+.menu-tile .tile-info {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menu-tile .name {
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.menu-tile .price {
+  font-family: "IBM Plex Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+.gallery-caption {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin: 6px 2px 0;
+}
+
 .chat-body {
   flex: 1;
   overflow-y: auto;
