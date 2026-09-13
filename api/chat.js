@@ -69,10 +69,12 @@ module.exports = async (req, res) => {
         answer,
         at: new Date().toISOString(),
       });
-      redis
-        .lpush("chat_logs", logEntry)
-        .then(() => redis.ltrim("chat_logs", 0, CHAT_LOG_LIMIT - 1))
-        .catch((err) => console.error("No se pudo guardar el log de chat:", err));
+      try {
+        await redis.lpush("chat_logs", logEntry);
+        await redis.ltrim("chat_logs", 0, CHAT_LOG_LIMIT - 1);
+      } catch (err) {
+        console.error("No se pudo guardar el log de chat:", err);
+      }
     }
 
     res.status(200).json({ text: answer });
