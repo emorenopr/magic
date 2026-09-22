@@ -88,9 +88,10 @@ function renderConversations(conversations) {
   list.innerHTML = conversations
     .map((c) => {
       const when = c.at ? new Date(c.at).toLocaleString("es-PR") : "";
+      const channel = c.channel === "phone" ? `📞 Llamada${c.from ? " (…" + c.from + ")" : ""} · ` : "";
       return `
         <div class="entry">
-          <div class="meta">${escapeHtml(when)}</div>
+          <div class="meta">${escapeHtml(channel + when)}</div>
           <div class="q"><strong>Cliente:</strong> ${escapeHtml(c.question || "")}</div>
           <div class="a"><strong>Bot:</strong> ${escapeHtml(c.answer || "")}</div>
         </div>`;
