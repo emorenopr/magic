@@ -2,3 +2,7 @@ node_modules/
 .env
 .env.local
 .vercel
+
+# Prospector: tu lista de prospectos y resultados (datos de contacto, no se suben)
+prospector/leads.csv
+prospector/data/
