@@ -24,6 +24,7 @@ Google no da emails: complétalos a mano (Facebook, Instagram, directorios de co
 
 | columna | para qué |
 |---|---|
+| `nombre_corto` | opcional: cómo llamarle en el email ("Dra. Ortiz"); si está vacío se usa `nombre` |
 | `nombre`, `categoria` | categoría: `medico`, `dentista`, `abogado`, `restaurante`, `belleza`, `taller` (o cualquier texto; se adivina) |
 | `web` | vacío = no tiene web |
 | `email`, `telefono`, `whatsapp` | si la web los tiene, se sacan solos |

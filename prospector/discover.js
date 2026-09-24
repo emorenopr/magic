@@ -12,7 +12,7 @@ const fs = require("fs");
 const path = require("path");
 const { ROOT, parseCsv, toCsv, parseArgs } = require("./lib/util");
 
-const HEADERS = ["nombre", "categoria", "web", "email", "telefono", "whatsapp", "direccion", "ciudad", "horario", "servicios", "eslogan", "notas"];
+const HEADERS = ["nombre", "nombre_corto", "categoria", "web", "email", "telefono", "whatsapp", "direccion", "ciudad", "horario", "servicios", "eslogan", "notas"];
 const FIELD_MASK = [
   "places.displayName",
   "places.formattedAddress",
@@ -85,6 +85,7 @@ async function main() {
 
     const lead = {
       nombre: p.displayName?.text || "",
+      nombre_corto: "",
       categoria: args.categoria || p.primaryTypeDisplayName?.text || "",
       web: p.websiteUri || "",
       email: "",

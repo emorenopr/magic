@@ -112,11 +112,19 @@ async function aiCopy(lead, preset) {
 
 function buildEmail(lead, copy, proposalUrl, config) {
   const reasons = (lead.audit?.reasons || []).filter((r) => r !== "No tiene página web").slice(0, 3);
-  const greeting = /medic|dentista/.test(lead.presetKey) ? `Saludos, equipo de ${lead.nombre}:` : `Hola, equipo de ${lead.nombre}:`;
+  // "nombre_corto" (opcional) hace que el email suene natural: "Dra. Ortiz" en vez de "Dra. Carmen Ortiz — Pediatría".
+  const short = lead.nombre_corto || lead.nombre;
+  const isPerson = /^(dra?|lcd[oa])\.?\s/i.test(short);
+  const article = /^(dra|lcda)\.?\s/i.test(short) ? "a la " : /^(dr|lcdo)\.?\s/i.test(short) ? "al " : "";
+  const greeting = isPerson
+    ? `Saludos, ${short}:`
+    : /medic|dentista/.test(lead.presetKey)
+      ? `Saludos, equipo de ${short}:`
+      : `Hola, equipo de ${short}:`;
 
   let problem;
   if (lead.audit?.status === "sin-web") {
-    problem = `Busqué ${lead.nombre} en Google y no encontré una página web. Hoy la mayoría de los clientes buscan en el celular antes de llamar, y sin web ese cliente muchas veces termina en otro lugar.`;
+    problem = `Busqué ${article}${short} en Google y no encontré una página web. Hoy la mayoría de los clientes buscan en el celular antes de llamar, y sin web ese cliente muchas veces termina en otro lugar.`;
   } else if (lead.audit?.status === "caida") {
     problem = `Intenté entrar a ${lead.web} y la página no está abriendo. Cada día que está caída, los clientes que la buscan ven un error.`;
   } else {
