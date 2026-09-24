@@ -3,22 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Morenos Electric</title>
+<title>Moreno's Electric</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Permanent+Marker&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Permanent+Marker&family=Libre+Caslon+Text:wght@700&display=swap">
 <style>
   :root {
-    --navy: #10233F;
-    --navy-2: #183257;
-    --volt: #FFC20E;
-    --copper: #C4622D;
+    --navy: #1F3F8F;
+    --navy-2: #2A4FA8;
+    --volt: #F7D417;
+    --copper: #1E8A3A;
+    --brand-green: #1E8A3A;
+    --brand-blue: #243F94;
     --bg: #F3F5F8;
     --surface: #FFFFFF;
     --ink: #0E1A2B;
     --muted: #4F5E73;
     --line: #D6DDE7;
     --on-navy: #EEF2F8;
-    --on-navy-muted: #A9B8CE;
+    --on-navy-muted: #C6D2EE;
     --panel-metal: #C9D1DB;
     --panel-metal-2: #AEB8C5;
     --panel-inner: #1A2433;
@@ -27,6 +29,7 @@
     --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     --marker: "Permanent Marker", "Comic Sans MS", cursive;
+    --serif: "Libre Caslon Text", "Times New Roman", Georgia, serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -36,9 +39,11 @@
       --ink: #E7ECF3;
       --muted: #9DACC1;
       --line: #24354F;
-      --navy: #0E1B31;
-      --navy-2: #16294A;
-      --copper: #E07D45;
+      --navy: #142B63;
+      --navy-2: #1D3A80;
+      --copper: #5BC878;
+      --brand-green: #5BC878;
+      --brand-blue: #3D63C9;
     }
   }
   :root[data-theme="dark"] {
@@ -48,9 +53,11 @@
     --ink: #E7ECF3;
     --muted: #9DACC1;
     --line: #24354F;
-    --navy: #0E1B31;
-    --navy-2: #16294A;
-    --copper: #E07D45;
+    --navy: #142B63;
+    --navy-2: #1D3A80;
+    --copper: #5BC878;
+    --brand-green: #5BC878;
+    --brand-blue: #3D63C9;
   }
 
   * { box-sizing: border-box; }
@@ -72,27 +79,25 @@
 
   /* ---------- Top bar ---------- */
   .emergency {
-    background: var(--volt); color: #1B1300;
+    background: var(--brand-green); color: #fff;
     font-size: 14px; font-weight: 600;
   }
   .emergency .wrap { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; padding-block: 8px; }
   .emergency b { font-family: var(--mono); }
   header.nav {
     position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
-    background: var(--navy); color: var(--on-navy);
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: var(--surface); color: var(--ink);
+    border-bottom: 1px solid var(--line);
   }
   header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-mark {
-    width: 38px; height: 38px; border-radius: 8px; background: var(--volt);
-    display: grid; place-items: center; flex: none;
-  }
-  .logo-text { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
-  .logo-text span { color: var(--volt); }
+  .logo { display: flex; align-items: center; gap: 4px; text-decoration: none; }
+  .logo-bolt { width: 32px; height: 56px; flex: none; }
+  .logo-words { display: grid; line-height: 1; }
+  .logo-name { font-family: var(--serif); font-weight: 700; font-size: 31px; color: var(--brand-green); letter-spacing: .01em; }
+  .logo-band { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .45em; color: #fff; background: var(--brand-blue); padding: 3px 4px 2px 8px; margin-top: 2px; text-align: center; }
   .nav-links { display: flex; gap: 24px; font-size: 15px; font-weight: 500; }
-  .nav-links a { text-decoration: none; color: var(--on-navy-muted); }
-  .nav-links a:hover { color: var(--on-navy); }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .04em; text-transform: uppercase;
@@ -100,12 +105,13 @@
     transition: transform .12s ease, background .12s ease;
   }
   .btn:hover { transform: translateY(-1px); }
-  .btn-volt { background: var(--volt); color: #1B1300; }
-  .btn-volt:hover { background: #FFD24D; }
+  .btn-volt { background: var(--volt); color: #14213F; }
+  .btn-volt:hover { background: #FFE14A; }
+  header.nav .btn-volt { box-shadow: inset 0 0 0 2px var(--brand-green); }
   .btn-ghost { border-color: rgba(238,242,248,.35); color: var(--on-navy); background: transparent; }
   .btn-ghost:hover { border-color: var(--volt); }
   @media (max-width: 860px) { .nav-links { display: none; } }
-  @media (max-width: 420px) { header.nav .btn { padding: 10px 14px; font-size: 16px; } .logo-text { font-size: 22px; } }
+  @media (max-width: 420px) { header.nav .btn { padding: 10px 14px; font-size: 16px; } .logo-name { font-size: 21px; } }
 
   /* ---------- Hero ---------- */
   .hero { background: var(--navy); color: var(--on-navy); position: relative; overflow: hidden; }
@@ -221,7 +227,7 @@
   .quote h2 { font-size: clamp(38px, 5vw, 60px); font-weight: 800; text-transform: uppercase; }
   .quote h2 em { font-style: normal; color: var(--volt); }
   .quote p { color: var(--on-navy-muted); }
-  .phone-card { margin-top: 28px; padding: 20px; border: 1px dashed rgba(255,194,14,.5); border-radius: 8px; display: grid; gap: 6px; }
+  .phone-card { margin-top: 28px; padding: 20px; border: 1px dashed rgba(247,212,23,.55); border-radius: 8px; display: grid; gap: 6px; }
   .phone-card .num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--volt); user-select: all; }
   .phone-card small { color: var(--on-navy-muted); font-size: 13px; }
   form { background: var(--surface); color: var(--ink); border-radius: 10px; padding: 28px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
@@ -239,7 +245,7 @@
   @media (max-width: 860px) { .quote .wrap { grid-template-columns: 1fr; padding-block: 56px; } }
   @media (max-width: 520px) { form { grid-template-columns: 1fr; padding: 20px; } }
 
-  footer { background: #0A1628; color: #A9B8CE; font-size: 14px; }
+  footer { background: #12275C; color: #A9B8CE; font-size: 14px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-block: 28px; }
   footer b { color: #EEF2F8; }
   footer .mono { font-family: var(--mono); font-size: 12px; }
@@ -255,18 +261,16 @@
 <body>
 <div class="emergency">
   <div class="wrap">
-    <span>⚡ 24/7 emergency service across North &amp; Central Jersey</span>
-    <span>Call <b>(201) 555-0142</b> · Se habla español</span>
+    <span>⚡ Electrical contracting in Kenilworth &amp; Union County, NJ</span>
+    <span>Call <b>908-209-5232</b> · Se habla español</span>
   </div>
 </div>
 
 <header class="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Morenos Electric home">
-      <span class="logo-mark" aria-hidden="true">
-        <svg width="20" height="24" viewBox="0 0 20 24"><path d="M12 0 0 14h8l-2 10L20 9h-8l2-9z" fill="#10233F"/></svg>
-      </span>
-      <span class="logo-text">Morenos <span>Electric</span></span>
+    <a class="logo" href="#top" aria-label="Moreno's Electric home">
+      <svg class="logo-bolt" viewBox="0 0 26 46" aria-hidden="true"><path d="M3 1 15 21 11 22 24 45 7 26 12 25z" fill="#F7D417" stroke="#1E8A3A" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <span class="logo-words"><span class="logo-name">MORENO'S</span><span class="logo-band">ELECTRIC</span></span>
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="#services">Services</a>
@@ -282,7 +286,7 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Licensed NJ Electrical Contractor</span>
+        <span class="eyebrow">Electrical Contracting · Lic #17720</span>
         <h1>Power done right. <em>Code-safe</em> every time.</h1>
         <p class="lede">Panel upgrades, EV chargers, generators and full rewiring for homes and businesses in New Jersey. We pull the permit, pass the township inspection and leave your home cleaner than we found it.</p>
         <div class="ctas">
@@ -290,7 +294,7 @@
           <a class="btn btn-ghost" href="#services">See our services</a>
         </div>
         <div class="creds">
-          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>NJ Lic. #34EB00XXXXXX</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>NJ Lic. #17720</span>
           <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>Fully insured &amp; bonded</span>
           <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>NEC 2020 compliant</span>
         </div>
@@ -302,7 +306,7 @@
           <div class="main-breaker">
             <div>
               <small>Main breaker</small><br>
-              <span style="font-family:var(--marker);font-size:15px;">Morenos Electric</span>
+              <span style="font-family:var(--marker);font-size:15px;">Moreno's Electric</span>
             </div>
             <span class="amp">200A</span>
           </div>
@@ -322,7 +326,7 @@
 
   <div class="strip">
     <div class="wrap">
-      <div class="stat"><b>24/7</b><span>Emergency response</span></div>
+      <div class="stat"><b>Lic #17720</b><span>Licensed in New Jersey</span></div>
       <div class="stat"><b>Same week</b><span>Most estimates &amp; installs</span></div>
       <div class="stat"><b>100%</b><span>Permitted &amp; inspected work</span></div>
       <div class="stat"><b>EN / ES</b><span>Bilingual crew</span></div>
@@ -393,18 +397,17 @@
       <div>
         <div class="section-head">
           <span class="eyebrow">Service area</span>
-          <h2>Serving North &amp; Central Jersey</h2>
-          <p>Based in Bergen County. We cover these counties with no travel fee.</p>
+          <h2>Serving Union County &amp; Central Jersey</h2>
+          <p>Based at 220 N. 21st Street in Kenilworth. We cover these counties with no travel fee.</p>
         </div>
         <div class="counties">
-          <span class="chip home">Bergen</span>
-          <span class="chip">Hudson</span>
-          <span class="chip">Passaic</span>
+          <span class="chip home">Union</span>
           <span class="chip">Essex</span>
-          <span class="chip">Union</span>
-          <span class="chip">Morris</span>
           <span class="chip">Middlesex</span>
           <span class="chip">Somerset</span>
+          <span class="chip">Morris</span>
+          <span class="chip">Hudson</span>
+          <span class="chip">Monmouth</span>
         </div>
       </div>
       <div>
@@ -438,15 +441,15 @@
         <h2 style="margin-top:12px">Tell us about <em>your project</em></h2>
         <p>Send the details and we'll call you back the same business day with next steps.</p>
         <div class="phone-card">
-          <small>Prefer to talk? Call or text</small>
-          <span class="num">(201) 555-0142</span>
-          <small>Mon–Sat 7am–6pm · Emergencies 24/7</small>
+          <small>Prefer to talk? Call Jose Moreno, President</small>
+          <span class="num">908-209-5232</span>
+          <small>Email: <span style="user-select:all">morenoselectric@hotmail.com</span> · Fax: 908-709-2038</small>
         </div>
       </div>
       <form id="quote-form" novalidate>
         <div class="field"><label for="q-name">Full name</label><input id="q-name" name="name" autocomplete="name" placeholder="María Rodríguez" required></div>
-        <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="(201) 555-0100" required></div>
-        <div class="field"><label for="q-town">Town</label><input id="q-town" name="town" placeholder="Hackensack"></div>
+        <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="(908) 555-0100" required></div>
+        <div class="field"><label for="q-town">Town</label><input id="q-town" name="town" placeholder="Kenilworth"></div>
         <div class="field">
           <label for="q-service">Service</label>
           <select id="q-service" name="service">
@@ -469,9 +472,9 @@
 
 <footer>
   <div class="wrap">
-    <div><b>Morenos Electric LLC</b> · Bergen County, New Jersey</div>
-    <div class="mono">NJ Electrical Contractor Lic. #34EB00XXXXXX · Insured</div>
-    <div>© 2026 Morenos Electric</div>
+    <div><b>Moreno's Electric</b> · Electrical Contracting<br>220 N. 21st Street, Kenilworth, NJ 07033</div>
+    <div>T 908-209-5232 · F 908-709-2038<br>morenoselectric@hotmail.com</div>
+    <div class="mono">NJ Lic #17720<br>© 2026 Moreno's Electric</div>
   </div>
 </footer>
 
@@ -507,7 +510,7 @@
       if (!name || !phone) {
         msg.textContent = 'Add your name and phone number so we can call you back.';
       } else {
-        msg.textContent = 'Thanks, ' + name.split(' ')[0] + '. This is a draft preview, so the form is not connected yet. On the live site this request would go to the Morenos Electric team.';
+        msg.textContent = 'Thanks, ' + name.split(' ')[0] + '. This is a draft preview, so the form is not connected yet. On the live site this request would go to the Moreno's Electric team.';
       }
       msg.hidden = false;
     });
