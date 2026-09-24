@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Morenos Electric</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Permanent+Marker&display=swap">
+<style>
+  :root {
+    --navy: #10233F;
+    --navy-2: #183257;
+    --volt: #FFC20E;
+    --copper: #C4622D;
+    --bg: #F3F5F8;
+    --surface: #FFFFFF;
+    --ink: #0E1A2B;
+    --muted: #4F5E73;
+    --line: #D6DDE7;
+    --on-navy: #EEF2F8;
+    --on-navy-muted: #A9B8CE;
+    --panel-metal: #C9D1DB;
+    --panel-metal-2: #AEB8C5;
+    --panel-inner: #1A2433;
+    --ok: #2FB36B;
+    --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+    --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --marker: "Permanent Marker", "Comic Sans MS", cursive;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0B1422;
+      --surface: #122036;
+      --ink: #E7ECF3;
+      --muted: #9DACC1;
+      --line: #24354F;
+      --navy: #0E1B31;
+      --navy-2: #16294A;
+      --copper: #E07D45;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0B1422;
+    --surface: #122036;
+    --ink: #E7ECF3;
+    --muted: #9DACC1;
+    --line: #24354F;
+    --navy: #0E1B31;
+    --navy-2: #16294A;
+    --copper: #E07D45;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--volt); outline-offset: 2px; }
+  .wrap { max-width: 1160px; margin-inline: auto; padding-inline: 20px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.02; margin: 0; text-wrap: balance; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--copper);
+  }
+
+  /* ---------- Top bar ---------- */
+  .emergency {
+    background: var(--volt); color: #1B1300;
+    font-size: 14px; font-weight: 600;
+  }
+  .emergency .wrap { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; padding-block: 8px; }
+  .emergency b { font-family: var(--mono); }
+  header.nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--navy); color: var(--on-navy);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 8px; background: var(--volt);
+    display: grid; place-items: center; flex: none;
+  }
+  .logo-text { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
+  .logo-text span { color: var(--volt); }
+  .nav-links { display: flex; gap: 24px; font-size: 15px; font-weight: 500; }
+  .nav-links a { text-decoration: none; color: var(--on-navy-muted); }
+  .nav-links a:hover { color: var(--on-navy); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .04em; text-transform: uppercase;
+    padding: 12px 22px; border-radius: 6px; border: 2px solid transparent; text-decoration: none; cursor: pointer;
+    transition: transform .12s ease, background .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-volt { background: var(--volt); color: #1B1300; }
+  .btn-volt:hover { background: #FFD24D; }
+  .btn-ghost { border-color: rgba(238,242,248,.35); color: var(--on-navy); background: transparent; }
+  .btn-ghost:hover { border-color: var(--volt); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+  @media (max-width: 420px) { header.nav .btn { padding: 10px 14px; font-size: 16px; } .logo-text { font-size: 22px; } }
+
+  /* ---------- Hero ---------- */
+  .hero { background: var(--navy); color: var(--on-navy); position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .hero .wrap {
+    position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center;
+    padding-block: 64px 72px;
+  }
+  .hero h1 { font-size: clamp(46px, 7vw, 88px); font-weight: 800; text-transform: uppercase; letter-spacing: -.005em; }
+  .hero h1 em { font-style: normal; color: var(--volt); }
+  .hero p.lede { font-size: 19px; color: var(--on-navy-muted); max-width: 34em; margin: 20px 0 28px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .eyebrow { color: var(--volt); display: block; margin-bottom: 16px; }
+  .creds { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 32px; font-size: 14px; color: var(--on-navy-muted); }
+  .creds span { display: inline-flex; align-items: center; gap: 8px; }
+  .creds svg { color: var(--volt); flex: none; }
+  @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; padding-block: 44px 56px; } }
+
+  /* ---------- Breaker panel ---------- */
+  .panel {
+    background: linear-gradient(160deg, var(--panel-metal), var(--panel-metal-2));
+    border-radius: 10px; padding: 18px; color: #1B2433;
+    box-shadow: 0 30px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.6);
+    max-width: 440px; width: 100%; justify-self: center;
+  }
+  .panel-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #3A4658; }
+  .panel-inner { background: var(--panel-inner); border-radius: 6px; padding: 14px; display: grid; gap: 10px; }
+  .main-breaker { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 4px; background: #253246; color: #DDE5F0; }
+  .main-breaker .amp { font-family: var(--mono); font-weight: 700; font-size: 20px; color: var(--volt); }
+  .main-breaker small { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #93A3BA; }
+  .breakers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .breaker {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px;
+    background: #F4F1E8; border-radius: 3px; padding: 8px 10px; border: 0; cursor: pointer; text-align: left;
+    font: inherit; color: #1B2433; transition: background .15s ease;
+  }
+  .breaker .toggle { width: 14px; height: 26px; border-radius: 3px; background: #2A3547; position: relative; flex: none; }
+  .breaker .toggle::after {
+    content: ""; position: absolute; left: 2px; right: 2px; height: 10px; border-radius: 2px; top: 2px;
+    background: #E9EDF3; transition: top .15s ease;
+  }
+  .breaker[aria-pressed="false"] .toggle::after { top: 14px; }
+  .breaker .label { font-family: var(--marker); font-size: 14px; line-height: 1.15; color: #16325C; }
+  .breaker .amp { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #5A6477; }
+  .breaker[aria-pressed="false"] { background: #E3DED1; }
+  .breaker[aria-pressed="false"] .label { color: #8A8577; text-decoration: line-through; text-decoration-thickness: 1px; }
+  .panel-note { margin-top: 10px; font-size: 12px; color: #3A4658; font-family: var(--mono); }
+  @media (max-width: 380px) { .breakers { grid-template-columns: 1fr; } }
+
+  /* ---------- Trust strip ---------- */
+  .strip { background: var(--surface); border-bottom: 1px solid var(--line); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .stat { padding: 22px 20px; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .stat b { display: block; font-family: var(--display); font-size: 30px; font-weight: 800; line-height: 1.1; }
+  .stat span { font-size: 14px; color: var(--muted); }
+  @media (max-width: 760px) {
+    .strip .wrap { grid-template-columns: 1fr 1fr; }
+    .stat { border-left: 0; padding-left: 0; }
+  }
+
+  /* ---------- Sections ---------- */
+  section.block { padding-block: 80px; }
+  .section-head { display: grid; gap: 12px; max-width: 640px; margin-bottom: 40px; }
+  .section-head h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; text-transform: uppercase; }
+  .section-head p { color: var(--muted); margin: 0; font-size: 17px; }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .svc { background: var(--surface); padding: 28px 26px; display: grid; gap: 10px; align-content: start; transition: background .15s ease; }
+  .svc.active { background: color-mix(in srgb, var(--volt) 14%, var(--surface)); }
+  .svc-top { display: flex; justify-content: space-between; align-items: center; }
+  .svc-icon { width: 44px; height: 44px; border-radius: 8px; background: var(--navy); color: var(--volt); display: grid; place-items: center; }
+  .spec { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--copper); letter-spacing: .04em; }
+  .svc h3 { font-size: 27px; font-weight: 700; text-transform: uppercase; margin-top: 6px; }
+  .svc p { margin: 0; color: var(--muted); font-size: 15px; }
+  @media (max-width: 900px) { .services { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .services { grid-template-columns: 1fr; } }
+
+  /* Process */
+  .process-bg { background: var(--surface); border-block: 1px solid var(--line); }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; counter-reset: step; }
+  .steps li { counter-increment: step; display: grid; gap: 8px; align-content: start; padding-top: 18px; border-top: 3px solid var(--line); }
+  .steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--copper); }
+  .steps li:first-child { border-top-color: var(--volt); }
+  .steps h3 { font-size: 24px; font-weight: 700; text-transform: uppercase; }
+  .steps p { margin: 0; font-size: 15px; color: var(--muted); }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+  /* Area */
+  .area { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .counties { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .chip { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+  .chip.home { background: var(--navy); color: var(--on-navy); border-color: var(--navy); }
+  .faq { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); padding-block: 16px; }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--mono); color: var(--copper); font-size: 20px; line-height: 1; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq p { margin: 10px 0 0; color: var(--muted); font-size: 15px; max-width: 60ch; }
+  @media (max-width: 860px) { .area { grid-template-columns: 1fr; } }
+
+  /* Quote */
+  .quote { background: var(--navy); color: var(--on-navy); }
+  .quote .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; padding-block: 80px; }
+  .quote h2 { font-size: clamp(38px, 5vw, 60px); font-weight: 800; text-transform: uppercase; }
+  .quote h2 em { font-style: normal; color: var(--volt); }
+  .quote p { color: var(--on-navy-muted); }
+  .phone-card { margin-top: 28px; padding: 20px; border: 1px dashed rgba(255,194,14,.5); border-radius: 8px; display: grid; gap: 6px; }
+  .phone-card .num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--volt); user-select: all; }
+  .phone-card small { color: var(--on-navy-muted); font-size: 13px; }
+  form { background: var(--surface); color: var(--ink); border-radius: 10px; padding: 28px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+  .field { display: grid; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: 13px; font-weight: 700; letter-spacing: .03em; }
+  input, select, textarea {
+    font: inherit; font-size: 15px; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 6px; padding: 11px 12px; width: 100%;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--volt); outline-offset: 0; border-color: transparent; }
+  form .btn { grid-column: 1 / -1; }
+  .form-msg { grid-column: 1 / -1; margin: 0; font-size: 14px; padding: 12px 14px; border-radius: 6px; background: color-mix(in srgb, var(--ok) 15%, var(--surface)); }
+  @media (max-width: 860px) { .quote .wrap { grid-template-columns: 1fr; padding-block: 56px; } }
+  @media (max-width: 520px) { form { grid-template-columns: 1fr; padding: 20px; } }
+
+  footer { background: #0A1628; color: #A9B8CE; font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-block: 28px; }
+  footer b { color: #EEF2F8; }
+  footer .mono { font-family: var(--mono); font-size: 12px; }
+
+  .draft-tag {
+    position: fixed; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 20;
+    font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--copper); color: #fff; padding: 6px 10px; border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="emergency">
+  <div class="wrap">
+    <span>⚡ 24/7 emergency service across North &amp; Central Jersey</span>
+    <span>Call <b>(201) 555-0142</b> · Se habla español</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Morenos Electric home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="20" height="24" viewBox="0 0 20 24"><path d="M12 0 0 14h8l-2 10L20 9h-8l2-9z" fill="#10233F"/></svg>
+      </span>
+      <span class="logo-text">Morenos <span>Electric</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#area">Service area</a>
+      <a href="#quote">Contact</a>
+    </nav>
+    <a class="btn btn-volt" href="#quote">Free estimate</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Licensed NJ Electrical Contractor</span>
+        <h1>Power done right. <em>Code-safe</em> every time.</h1>
+        <p class="lede">Panel upgrades, EV chargers, generators and full rewiring for homes and businesses in New Jersey. We pull the permit, pass the township inspection and leave your home cleaner than we found it.</p>
+        <div class="ctas">
+          <a class="btn btn-volt" href="#quote">Get a free estimate</a>
+          <a class="btn btn-ghost" href="#services">See our services</a>
+        </div>
+        <div class="creds">
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>NJ Lic. #34EB00XXXXXX</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>Fully insured &amp; bonded</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5 6.5 12 13 4"/></svg>NEC 2020 compliant</span>
+        </div>
+      </div>
+
+      <div class="panel" aria-label="Interactive breaker panel showing our services">
+        <div class="panel-head"><span>Load Center · 120/240V</span><span>Circuit directory</span></div>
+        <div class="panel-inner">
+          <div class="main-breaker">
+            <div>
+              <small>Main breaker</small><br>
+              <span style="font-family:var(--marker);font-size:15px;">Morenos Electric</span>
+            </div>
+            <span class="amp">200A</span>
+          </div>
+          <div class="breakers" id="breakers">
+            <button class="breaker" type="button" aria-pressed="true" data-svc="panel"><span class="toggle"></span><span class="label">Panel upgrade</span><span class="amp">200A</span></button>
+            <button class="breaker" type="button" aria-pressed="true" data-svc="ev"><span class="toggle"></span><span class="label">EV charger</span><span class="amp">50A</span></button>
+            <button class="breaker" type="button" aria-pressed="true" data-svc="gen"><span class="toggle"></span><span class="label">Generator</span><span class="amp">30A</span></button>
+            <button class="breaker" type="button" aria-pressed="true" data-svc="light"><span class="toggle"></span><span class="label">Lighting</span><span class="amp">15A</span></button>
+            <button class="breaker" type="button" aria-pressed="true" data-svc="rewire"><span class="toggle"></span><span class="label">Rewiring</span><span class="amp">20A</span></button>
+            <button class="breaker" type="button" aria-pressed="true" data-svc="comm"><span class="toggle"></span><span class="label">Commercial</span><span class="amp">3Ø</span></button>
+          </div>
+        </div>
+        <p class="panel-note">Flip a breaker to jump to that service.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="stat"><b>24/7</b><span>Emergency response</span></div>
+      <div class="stat"><b>Same week</b><span>Most estimates &amp; installs</span></div>
+      <div class="stat"><b>100%</b><span>Permitted &amp; inspected work</span></div>
+      <div class="stat"><b>EN / ES</b><span>Bilingual crew</span></div>
+    </div>
+  </div>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Services</span>
+        <h2>Residential &amp; commercial electrical work</h2>
+        <p>From a single outlet to a full service change, every job is done by licensed electricians and built to the National Electrical Code.</p>
+      </div>
+      <div class="services">
+        <article class="svc" id="svc-panel">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h3M13 7h3M8 12h3M13 12h3M8 17h3M13 17h3"/></svg></span><span class="spec">100A → 200A</span></div>
+          <h3>Panel upgrades</h3>
+          <p>Replace outdated fuse boxes and Federal Pacific or Zinsco panels. Service upgrades coordinated with PSE&amp;G and JCP&amp;L.</p>
+        </article>
+        <article class="svc" id="svc-ev">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="12" height="17" rx="2"/><path d="M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M10 8l-3 5h4l-3 5"/></svg></span><span class="spec">Level 2 · 240V</span></div>
+          <h3>EV chargers</h3>
+          <p>Tesla, ChargePoint and JuiceBox installs in your garage or driveway. We help you file for NJ Clean Energy rebates.</p>
+        </article>
+        <article class="svc" id="svc-gen">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="12" rx="2"/><path d="M6 7V4h12v3M13 10l-3 3.5h4L11 17"/></svg></span><span class="spec">Auto transfer</span></div>
+          <h3>Generators</h3>
+          <p>Standby generators with automatic transfer switches, so the lights stay on through the next nor'easter.</p>
+        </article>
+        <article class="svc" id="svc-light">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span class="spec">LED · Dimmers</span></div>
+          <h3>Lighting</h3>
+          <p>Recessed lights, landscape lighting, ceiling fans and smart switches, installed and balanced on the right circuits.</p>
+        </article>
+        <article class="svc" id="svc-rewire">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c3 0 3-6 6-6s3 12 6 12 3-6 6-6"/></svg></span><span class="spec">Knob &amp; tube</span></div>
+          <h3>Rewiring</h3>
+          <p>Safe replacement of knob-and-tube and aluminum wiring in older Jersey homes, with GFCI and AFCI protection added.</p>
+        </article>
+        <article class="svc" id="svc-comm">
+          <div class="svc-top"><span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l6-4v17M9 21V10h12v11M3 21h18M13 14h1M17 14h1M13 17h1M17 17h1"/></svg></span><span class="spec">3-phase · 208V</span></div>
+          <h3>Commercial</h3>
+          <p>Tenant fit-outs, restaurant equipment circuits, exit and emergency lighting, and code corrections for inspections.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block process-bg" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From your call to a passed inspection</h2>
+        <p>New Jersey requires a permit and a township inspection for most electrical work. We handle all of it.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Call or book</h3><p>Tell us what you need. Emergencies get a callback within the hour.</p></li>
+        <li><h3>Free estimate</h3><p>We visit, check your panel and load, and give you a written, flat-rate price.</p></li>
+        <li><h3>Permit</h3><p>We file the electrical permit with your township's construction office.</p></li>
+        <li><h3>Install</h3><p>Licensed electricians do the work, usually in one or two days.</p></li>
+        <li><h3>Inspection</h3><p>We meet the inspector and hand you the approved paperwork.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="area">
+    <div class="wrap area">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">Service area</span>
+          <h2>Serving North &amp; Central Jersey</h2>
+          <p>Based in Bergen County. We cover these counties with no travel fee.</p>
+        </div>
+        <div class="counties">
+          <span class="chip home">Bergen</span>
+          <span class="chip">Hudson</span>
+          <span class="chip">Passaic</span>
+          <span class="chip">Essex</span>
+          <span class="chip">Union</span>
+          <span class="chip">Morris</span>
+          <span class="chip">Middlesex</span>
+          <span class="chip">Somerset</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-head" style="margin-bottom:20px"><span class="eyebrow">Common questions</span></div>
+        <div class="faq">
+          <details open>
+            <summary>How much does a panel upgrade cost?</summary>
+            <p>Most 200A residential upgrades in NJ fall between $2,500 and $4,500 including permit and inspection. We give you a fixed price after a free visit.</p>
+          </details>
+          <details>
+            <summary>Do you handle the permit?</summary>
+            <p>Yes. We file the permit, schedule the inspection with your township and are there when the inspector arrives.</p>
+          </details>
+          <details>
+            <summary>Can I get a rebate for an EV charger?</summary>
+            <p>Many NJ utilities and the state offer incentives for Level 2 chargers. We'll tell you which ones apply and help with the paperwork.</p>
+          </details>
+          <details>
+            <summary>Do you work on weekends?</summary>
+            <p>Emergency calls are answered 24/7. Scheduled work runs Monday to Saturday.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote" id="quote">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" style="color:var(--volt)">Free estimate</span>
+        <h2 style="margin-top:12px">Tell us about <em>your project</em></h2>
+        <p>Send the details and we'll call you back the same business day with next steps.</p>
+        <div class="phone-card">
+          <small>Prefer to talk? Call or text</small>
+          <span class="num">(201) 555-0142</span>
+          <small>Mon–Sat 7am–6pm · Emergencies 24/7</small>
+        </div>
+      </div>
+      <form id="quote-form" novalidate>
+        <div class="field"><label for="q-name">Full name</label><input id="q-name" name="name" autocomplete="name" placeholder="María Rodríguez" required></div>
+        <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="(201) 555-0100" required></div>
+        <div class="field"><label for="q-town">Town</label><input id="q-town" name="town" placeholder="Hackensack"></div>
+        <div class="field">
+          <label for="q-service">Service</label>
+          <select id="q-service" name="service">
+            <option value="panel">Panel upgrade</option>
+            <option value="ev">EV charger</option>
+            <option value="gen">Generator</option>
+            <option value="light">Lighting</option>
+            <option value="rewire">Rewiring</option>
+            <option value="comm">Commercial</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="field full"><label for="q-details">Project details</label><textarea id="q-details" name="details" placeholder="Our house has a 100A fuse box and we want to add an EV charger."></textarea></div>
+        <button class="btn btn-volt" type="submit">Request my estimate</button>
+        <p class="form-msg" id="form-msg" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Morenos Electric LLC</b> · Bergen County, New Jersey</div>
+    <div class="mono">NJ Electrical Contractor Lic. #34EB00XXXXXX · Insured</div>
+    <div>© 2026 Morenos Electric</div>
+  </div>
+</footer>
+
+<span class="draft-tag">Draft preview</span>
+
+<script>
+  (function () {
+    var breakers = document.querySelectorAll('.breaker');
+    breakers.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-pressed') === 'true';
+        b.setAttribute('aria-pressed', on ? 'false' : 'true');
+        if (on) {
+          var card = document.getElementById('svc-' + b.dataset.svc);
+          document.querySelectorAll('.svc.active').forEach(function (c) { c.classList.remove('active'); });
+          if (card) {
+            card.classList.add('active');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          var sel = document.getElementById('q-service');
+          if (sel) sel.value = b.dataset.svc;
+          setTimeout(function () { b.setAttribute('aria-pressed', 'true'); }, 1400);
+        }
+      });
+    });
+
+    var form = document.getElementById('quote-form');
+    var msg = document.getElementById('form-msg');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('q-name').value.trim();
+      var phone = document.getElementById('q-phone').value.trim();
+      if (!name || !phone) {
+        msg.textContent = 'Add your name and phone number so we can call you back.';
+      } else {
+        msg.textContent = 'Thanks, ' + name.split(' ')[0] + '. This is a draft preview, so the form is not connected yet. On the live site this request would go to the Morenos Electric team.';
+      }
+      msg.hidden = false;
+    });
+  })();
+</script>
+</body>
+</html>
