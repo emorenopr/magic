@@ -68,3 +68,25 @@ datos (años, premios, precios, planes médicos). Se guarda en caché: re-genera
 
 Buenas prácticas del email frío: un email por negocio, personalizado, con tu nombre y teléfono reales
 y la opción de decir "no" (ya viene en la plantilla). No compres listas ni envíes en masa desde tu Gmail.
+
+## Solicitudes que llegan (cotización + maqueta)
+
+Cuando un cliente **te pide** una web ("necesito una cotización para..."), en vez de mandar solo precios,
+mándale una maqueta de cómo se vería + la cotización:
+
+1. Copia `prospector/solicitudes/fundacion-multinational.json` (ejemplo) a `solicitudes/<cliente>.json`.
+2. Llena `solicitud` (lo que pidieron), `fases` con sus `items` y precios, `recurrentes`, `necesitamos`,
+   `condiciones` y `preguntas`. Si incluyes `maqueta` (lema, misión, quiénes somos, noticias, montos de
+   donación, colores) se genera también la maqueta del sitio. `notas_internas` solo sale en el borrador.
+3. Genera:
+
+```bash
+npm run prospectar:cotizar                         # todas, como BORRADOR (franja amarilla + notas internas)
+npm run prospectar:cotizar -- --solo <cliente>     # solo una
+npm run prospectar:cotizar -- --final              # versión para enviar (sin franja ni notas)
+```
+
+Sale en `propuestas/cotizaciones/<cliente>/`: la maqueta (`index.html`, con botones para ver la
+landing de la fase 1 y el sitio completo), la cotización (`cotizacion/`, con botón para guardar PDF)
+y `respuesta.txt` con el email ya escrito. La maqueta usa textos de ejemplo: no pongas datos que el
+cliente no te haya dado.

@@ -1,0 +1,198 @@
+{
+  "cliente": "Fundación Multinational",
+  "contacto": "",
+  "email": "",
+  "telefono": "",
+  "fecha": "2026-10-06",
+  "validez_dias": 30,
+  "solicitud": "Necesito una cotización para webpage de Fundación Multinational. Algo sencillo con un landing page inicial en lo que se trabaja y luego la página tendría un Quiénes Somos, Noticias, Dona Aquí.",
+  "resumen": "Página web sencilla en dos fases: primero una landing temporal para tener presencia en línea mientras se prepara el contenido, y luego el sitio completo con Quiénes Somos, Noticias y Dona Aquí.",
+  "fases": [
+    {
+      "nombre": "Fase 1 — Landing inicial",
+      "entrega": "5–7 días laborables",
+      "items": [
+        {
+          "nombre": "Landing page temporal",
+          "detalle": "Una sola página con logo, misión en 2–3 oraciones, enlaces a redes sociales y un mensaje de \"sitio en construcción\". Se ve bien en celular.",
+          "precio": 300
+        },
+        {
+          "nombre": "Formulario de contacto",
+          "detalle": "Los mensajes llegan al email de la fundación.",
+          "precio": 75
+        }
+      ]
+    },
+    {
+      "nombre": "Fase 2 — Sitio completo",
+      "entrega": "3–4 semanas desde que recibimos el contenido",
+      "items": [
+        {
+          "nombre": "Página de inicio",
+          "detalle": "Reemplaza la landing: presentación de la fundación, llamado a donar y últimas noticias.",
+          "precio": 350
+        },
+        {
+          "nombre": "Quiénes Somos",
+          "detalle": "Historia, misión, visión y equipo / junta directiva con fotos.",
+          "precio": 200
+        },
+        {
+          "nombre": "Noticias",
+          "detalle": "Sección de noticias que la fundación puede actualizar sola (título, foto, texto). Incluye entrenamiento de 30 minutos.",
+          "precio": 450
+        },
+        {
+          "nombre": "Dona Aquí",
+          "detalle": "Página de donaciones con botón de pago seguro (PayPal, Stripe o ATH Móvil Business) y montos sugeridos. Las comisiones de la plataforma de pago las cobra la plataforma.",
+          "precio": 300
+        },
+        {
+          "nombre": "Básico de SEO y analíticas",
+          "detalle": "Títulos y descripciones para Google, Google Analytics y registro en Google Search Console.",
+          "precio": 100
+        }
+      ]
+    }
+  ],
+  "descuento": {
+    "nombre": "Descuento para organizaciones sin fines de lucro (10%)",
+    "porcentaje": 10
+  },
+  "recurrentes": [
+    {
+      "nombre": "Dominio (.org)",
+      "detalle": "A nombre de la fundación. Precio aproximado del registrador.",
+      "precio": 20,
+      "periodo": "año"
+    },
+    {
+      "nombre": "Hosting + certificado SSL",
+      "detalle": "",
+      "precio": 120,
+      "periodo": "año"
+    },
+    {
+      "nombre": "Mantenimiento (opcional)",
+      "detalle": "Actualizaciones, respaldos y hasta 1 hora de cambios al mes.",
+      "precio": 50,
+      "periodo": "mes"
+    }
+  ],
+  "necesitamos": [
+    "Logo en buena calidad (PNG o SVG)",
+    "Misión, visión y un párrafo de historia",
+    "Fotos del equipo y de las actividades",
+    "Nombres y cargos de la junta / equipo",
+    "Cuenta de PayPal, Stripe o ATH Móvil Business para recibir donaciones",
+    "Número de exención 501(c)(3) o registro en el Departamento de Estado, si aplica (para mostrarlo en Dona Aquí)",
+    "Acceso al dominio, si ya tienen uno"
+  ],
+  "condiciones": [
+    "50% para comenzar cada fase y 50% al entregarla.",
+    "Incluye 2 rondas de cambios por fase.",
+    "El dominio y el hosting quedan a nombre de la fundación.",
+    "Contenido adicional (páginas nuevas, tienda, idioma inglés) se cotiza aparte."
+  ],
+  "preguntas": [
+    "¿Ya tienen dominio (ej. fundacionmultinational.org)? ¿Y logo?",
+    "¿Quién va a publicar las noticias y con qué frecuencia?",
+    "¿Qué plataforma prefieren para donaciones? ¿Necesitan donaciones recurrentes (mensuales)?",
+    "¿El sitio debe estar en español solamente o también en inglés?",
+    "¿Tienen fecha límite (evento, campaña, lanzamiento)?"
+  ],
+  "notas_internas": "Precios sugeridos de punto de partida: ajústalos antes de enviar. Falta nombre y email del contacto. La maqueta usa textos y cifras de ejemplo (no datos reales de la fundación).",
+  "maqueta": {
+    "nombre_corto": "Multinational",
+    "lema": "Uniendo manos para transformar comunidades.",
+    "mision": "Somos una organización sin fines de lucro que conecta personas, recursos y voluntarios para apoyar a las comunidades que más lo necesitan.",
+    "colores": {
+      "bg": "#f7f6f2",
+      "surface": "#ffffff",
+      "ink": "#14213d",
+      "muted": "#5b6478",
+      "accent": "#e4572e",
+      "accentInk": "#ffffff",
+      "deep": "#14213d",
+      "soft": "#fde8e1"
+    },
+    "quienes": {
+      "historia": "Aquí va la historia de la fundación: cómo empezó, quiénes la fundaron y qué la mueve. Dos o tres párrafos cortos funcionan mejor que uno largo.",
+      "valores": [
+        {
+          "titulo": "Misión",
+          "texto": "Qué hace la fundación y para quién, en una o dos oraciones."
+        },
+        {
+          "titulo": "Visión",
+          "texto": "Cómo se ve el mundo si la fundación cumple su misión."
+        },
+        {
+          "titulo": "Valores",
+          "texto": "Solidaridad, transparencia, compromiso: las palabras que los definen."
+        }
+      ],
+      "equipo": [
+        {
+          "nombre": "Nombre Apellido",
+          "cargo": "Presidente(a)"
+        },
+        {
+          "nombre": "Nombre Apellido",
+          "cargo": "Directora ejecutiva"
+        },
+        {
+          "nombre": "Nombre Apellido",
+          "cargo": "Tesorero(a)"
+        },
+        {
+          "nombre": "Nombre Apellido",
+          "cargo": "Coordinación de voluntarios"
+        }
+      ]
+    },
+    "noticias": [
+      {
+        "fecha": "2026-09-28",
+        "titulo": "Título de una actividad reciente",
+        "resumen": "Un resumen de dos líneas de lo que pasó, a quién se ayudó y cómo pueden participar la próxima vez."
+      },
+      {
+        "fecha": "2026-09-12",
+        "titulo": "Anuncio de una alianza o donación recibida",
+        "resumen": "Las noticias las publica la fundación sola desde un panel sencillo, con foto y texto."
+      },
+      {
+        "fecha": "2026-08-30",
+        "titulo": "Convocatoria de voluntarios",
+        "resumen": "Las noticias más recientes salen también en la portada para que el sitio siempre se vea vivo."
+      }
+    ],
+    "impacto": [
+      {
+        "numero": "000+",
+        "texto": "familias impactadas"
+      },
+      {
+        "numero": "00",
+        "texto": "voluntarios activos"
+      },
+      {
+        "numero": "0",
+        "texto": "países / comunidades"
+      }
+    ],
+    "montos": [
+      25,
+      50,
+      100,
+      250
+    ],
+    "redes": [
+      "Facebook",
+      "Instagram",
+      "LinkedIn"
+    ]
+  }
+}

@@ -10,6 +10,7 @@
   "scripts": {
     "prospectar:buscar": "node prospector/discover.js",
     "prospectar:auditar": "node prospector/audit.js",
-    "prospectar:generar": "node prospector/generate.js"
+    "prospectar:generar": "node prospector/generate.js",
+    "prospectar:cotizar": "node prospector/cotizar.js"
   }
 }
