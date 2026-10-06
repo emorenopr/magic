@@ -26,7 +26,11 @@ function renderMaqueta(sol, config) {
   const c = { ...DEFAULT_COLORS, ...(m.colores || {}) };
   const q = m.quienes || {};
   const name = sol.cliente;
-  const logo = initials(name) || "★";
+  const mark = m.marca
+    ? `<img src="${e(m.marca)}" alt="">`
+    : e(initials(name) || "★");
+  const font = m.fuenteTitulos || "Bricolage Grotesque";
+  const fontQuery = font === "Bricolage Grotesque" ? "Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800" : `${font.replace(/ /g, "+")}:wght@500;600;700`;
   const montos = m.montos || [25, 50, 100];
   const redes = (m.redes || []).map((r) => `<a href="#" onclick="return false">${e(r)}</a>`).join("");
 
@@ -53,7 +57,7 @@ function renderMaqueta(sol, config) {
   <meta name="robots" content="noindex, nofollow">
   <title>${e(name)} — propuesta de página web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Karla:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${fontQuery}&family=Karla:wght@400;500;700&display=swap">
   <style>
     :root {
       --bg: ${c.bg}; --surface: ${c.surface}; --ink: ${c.ink}; --muted: ${c.muted};
@@ -62,7 +66,8 @@ function renderMaqueta(sol, config) {
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Karla", system-ui, sans-serif; line-height: 1.6; }
-    h1, h2, h3 { font-family: "Bricolage Grotesque", sans-serif; line-height: 1.15; margin: 0; }
+    h1, h2, h3, .logo, .impact strong { font-family: "${e(font)}", serif; }
+    h1, h2, h3 { line-height: 1.15; margin: 0; }
     a { color: inherit; }
     .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
 
@@ -77,13 +82,19 @@ function renderMaqueta(sol, config) {
     .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 700; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
     .btn.ghost { background: transparent; color: inherit; border: 2px solid currentColor; }
     .eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 700; color: var(--accent); margin: 0 0 8px; }
-    .logo { display: inline-flex; align-items: center; gap: 10px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.1rem; text-decoration: none; }
-    .logo span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 0.95rem; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+    .logo span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; overflow: hidden; background: var(--deep); color: #fff; font-size: 0.95rem; }
+    .logo span img { width: 78%; height: auto; }
+    /* Sobre fondos oscuros (color de la marca) los botones van en blanco */
+    .on-dark .btn:not(.ghost) { background: #fff; color: var(--deep); }
+    .on-dark .eyebrow { color: rgba(255,255,255,0.75); }
+    .on-dark .donate-box .btn { background: var(--accent); color: var(--accent-ink); }
 
     /* ---------- Fase 1: landing ---------- */
-    .landing { min-height: calc(100vh - 44px); display: grid; place-items: center; text-align: center; padding: 48px 16px; background: radial-gradient(circle at 20% 10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 55%), var(--deep); color: #fff; }
+    .landing { min-height: calc(100vh - 44px); display: grid; place-items: center; text-align: center; padding: 48px 16px; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.12), transparent 60%), var(--deep); color: #fff; }
     .landing .logo span { width: 64px; height: 64px; font-size: 1.5rem; }
     .landing .logo { flex-direction: column; font-size: 1.4rem; }
+    .landing .full-logo { width: min(320px, 80vw); height: auto; display: block; margin: 0 auto; }
     .landing h1 { font-size: clamp(2rem, 7vw, 3.4rem); margin: 28px 0 14px; max-width: 18ch; margin-inline: auto; }
     .landing p { max-width: 52ch; margin: 0 auto 26px; opacity: 0.85; font-size: 1.08rem; }
     .soon { display: inline-block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.4); padding: 4px 12px; border-radius: 999px; }
@@ -98,7 +109,7 @@ function renderMaqueta(sol, config) {
     .site-nav nav a { text-decoration: none; }
     .site-nav .btn { padding: 8px 18px; }
 
-    .hero { background: linear-gradient(120deg, var(--deep) 0%, var(--deep) 55%, var(--accent) 140%); color: #fff; padding: clamp(56px, 10vw, 110px) 0; }
+    .hero { background: linear-gradient(120deg, color-mix(in srgb, var(--deep) 70%, #000) 0%, var(--deep) 70%); color: #fff; padding: clamp(56px, 10vw, 110px) 0; }
     .hero h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); max-width: 16ch; }
     .hero p { max-width: 52ch; font-size: 1.1rem; opacity: 0.88; margin: 16px 0 28px; }
     .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -141,7 +152,7 @@ function renderMaqueta(sol, config) {
     .methods { margin-top: 12px; font-size: 0.85rem; color: var(--muted); text-align: center; }
     .donate-box .msg { margin: 10px 0 0; font-size: 0.9rem; color: var(--muted); text-align: center; min-height: 1.4em; }
 
-    footer.site-footer { background: #0c1426; color: rgba(255,255,255,0.75); padding: 32px 0; font-size: 0.92rem; }
+    footer.site-footer { background: color-mix(in srgb, var(--deep) 55%, #000); color: rgba(255,255,255,0.75); padding: 32px 0; font-size: 0.92rem; }
     footer.site-footer .container { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
     footer.site-footer .socials { display: flex; gap: 16px; }
 
@@ -164,9 +175,9 @@ function renderMaqueta(sol, config) {
   <div class="sample-note">Maqueta con textos, fotos y cifras de ejemplo: se reemplazan con el contenido real de la fundación.</div>
 
   <!-- ===== Fase 1 ===== -->
-  <main id="landing" class="landing">
+  <main id="landing" class="landing on-dark">
     <div>
-      <span class="logo"><span>${e(logo)}</span>${e(name)}</span>
+      ${m.logo ? `<img class="full-logo" src="${e(m.logo)}" alt="${e(name)}">` : `<span class="logo"><span>${mark}</span>${e(name)}</span>`}
       <h1>${e(m.lema || "")}</h1>
       <p>${e(m.mision || "")}</p>
       <p><span class="soon">Nuestro sitio completo viene pronto</span></p>
@@ -182,7 +193,7 @@ function renderMaqueta(sol, config) {
   <div id="sitio">
     <header class="site-nav">
       <div class="container">
-        <a class="logo" href="#inicio"><span>${e(logo)}</span>${e(name)}</a>
+        <a class="logo" href="#inicio"><span>${mark}</span>${e(name)}</a>
         <nav>
           <a href="#quienes">Quiénes Somos</a>
           <a href="#noticias">Noticias</a>
@@ -191,7 +202,7 @@ function renderMaqueta(sol, config) {
       </div>
     </header>
 
-    <section class="hero" id="inicio">
+    <section class="hero on-dark" id="inicio">
       <div class="container">
         <p class="eyebrow">${e(name)}</p>
         <h1>${e(m.lema || "")}</h1>
@@ -228,7 +239,7 @@ function renderMaqueta(sol, config) {
       </div>
     </section>
 
-    <section class="block donate" id="dona">
+    <section class="block donate on-dark" id="dona">
       <div class="container">
         <p class="eyebrow">Dona Aquí</p>
         <h2>Tu donación hace la diferencia</h2>

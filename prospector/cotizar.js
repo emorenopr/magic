@@ -39,6 +39,7 @@ function totals(sol) {
 
 function renderQuote(sol, config, { final, maquetaHref }) {
   const t = totals(sol);
+  const brand = sol.maqueta?.colores || {};
   const folio = `COT-${(sol.fecha || "").replace(/-/g, "")}-${sol.slug.slice(0, 4).toUpperCase()}`;
   const venceIso = addDays(sol.fecha, sol.validez_dias || 30);
 
@@ -95,7 +96,7 @@ function renderQuote(sol, config, { final, maquetaHref }) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Karla:wght@400;500;700&display=swap">
   <style>
-    :root { --bg: #f4f5f7; --paper: #ffffff; --ink: #161a22; --muted: #5d6573; --line: #e2e5ea; --accent: #3b5bdb; --soft: #e8edfc; --warn: #fff3bf; --warn-ink: #5c4400; }
+    :root { --bg: #f4f5f7; --paper: #ffffff; --ink: #161a22; --muted: #5d6573; --line: #e2e5ea; --accent: ${e(brand.accent || "#3b5bdb")}; --soft: ${e(brand.soft || "#e8edfc")}; --warn: #fff3bf; --warn-ink: #5c4400; }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Karla", system-ui, sans-serif; line-height: 1.5; }
     .draft { background: var(--warn); color: var(--warn-ink); padding: 12px 16px; font-size: 0.92rem; }
@@ -312,7 +313,14 @@ function main() {
     const dir = path.join(OUT_DIR, slug);
     const quoteDir = path.join(dir, "cotizacion");
     fs.mkdirSync(quoteDir, { recursive: true });
-    if (sol.maqueta) fs.writeFileSync(path.join(dir, "index.html"), renderMaqueta(sol, config));
+    if (sol.maqueta) {
+      fs.writeFileSync(path.join(dir, "index.html"), renderMaqueta(sol, config));
+      // Logo e imágenes de la marca: rutas relativas a prospector/solicitudes/.
+      for (const asset of [sol.maqueta.logo, sol.maqueta.marca].filter(Boolean)) {
+        fs.mkdirSync(path.dirname(path.join(dir, asset)), { recursive: true });
+        fs.copyFileSync(path.join(SOLICITUDES_DIR, asset), path.join(dir, asset));
+      }
+    }
     fs.writeFileSync(path.join(quoteDir, "index.html"), renderQuote(sol, config, { final, maquetaHref: sol.maqueta ? "../" : "" }));
 
     const url = `${baseUrl}cotizaciones/${slug}/`;
