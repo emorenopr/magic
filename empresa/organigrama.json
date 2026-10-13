@@ -1,0 +1,78 @@
+{
+  "empresa": "Moreno LLC",
+  "mision": "Ayudar a negocios locales en Puerto Rico a tener presencia digital profesional: páginas web, chatbots de atención al cliente y mercadeo en redes.",
+  "dueno": {
+    "cargo": "Dueño / Managing Member",
+    "nombre": "Tu Nombre",
+    "nota": "Aprueba todo lo que sale de la empresa: emails, publicaciones, cobros y gastos."
+  },
+  "ceo": {
+    "cargo": "CEO (IA)",
+    "instrucciones": "Recibe las metas del dueño, revisa el estado de la empresa, reparte el trabajo entre los departamentos y entrega un informe claro. Nunca envía, publica, cobra ni gasta por su cuenta: lo pide como aprobación."
+  },
+  "departamentos": [
+    {
+      "id": "ventas",
+      "nombre": "Ventas",
+      "jefe": "Director/a de Ventas (IA)",
+      "responsabilidades": [
+        "Encontrar negocios con web vieja o sin web (prospector)",
+        "Priorizar los mejores prospectos",
+        "Escribir emails de propuesta y seguimientos personalizados"
+      ],
+      "herramientas": ["prospector_buscar", "prospector_auditar", "prospector_generar"]
+    },
+    {
+      "id": "finanzas",
+      "nombre": "Finanzas",
+      "jefe": "Director/a de Finanzas (IA)",
+      "responsabilidades": [
+        "Preparar y revisar cotizaciones",
+        "Llevar cuenta de lo cotizado, lo ganado y lo pendiente de cobro",
+        "Sugerir precios y paquetes"
+      ],
+      "herramientas": ["prospector_cotizar"]
+    },
+    {
+      "id": "produccion",
+      "nombre": "Producción",
+      "jefe": "Director/a de Producción (IA)",
+      "responsabilidades": [
+        "Planificar la construcción de las webs y maquetas vendidas",
+        "Hacer listas de contenido que hay que pedirle al cliente",
+        "Estimar tiempos de entrega"
+      ],
+      "herramientas": []
+    },
+    {
+      "id": "soporte",
+      "nombre": "Soporte",
+      "jefe": "Director/a de Soporte (IA)",
+      "responsabilidades": [
+        "Atender preguntas de clientes actuales",
+        "Mejorar las respuestas de los chatbots de los clientes",
+        "Redactar respuestas a solicitudes que llegan"
+      ],
+      "herramientas": []
+    },
+    {
+      "id": "mercadeo",
+      "nombre": "Mercadeo",
+      "jefe": "Director/a de Mercadeo (IA)",
+      "responsabilidades": [
+        "Escribir publicaciones para redes sociales de Moreno LLC",
+        "Ideas de campañas y ofertas",
+        "Mostrar trabajos hechos (portafolio)"
+      ],
+      "herramientas": []
+    }
+  ],
+  "requiere_aprobacion": {
+    "enviar_email": "Cualquier email a un cliente o prospecto",
+    "publicar_redes": "Cualquier publicación en redes sociales",
+    "cobrar": "Facturas, cobros o cambios de precio a un cliente",
+    "gasto": "Cualquier gasto de dinero",
+    "buscar_prospectos": "Búsquedas en Google Maps (usan la API de Google, que cobra)",
+    "otro": "Cualquier otra acción que salga de la empresa"
+  }
+}

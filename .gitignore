@@ -6,3 +6,6 @@ node_modules/
 # Prospector: tu lista de prospectos y resultados (datos de contacto, no se suben)
 prospector/leads.csv
 prospector/data/
+
+# Moreno LLC: tareas, aprobaciones, entregables e informes (datos de clientes)
+empresa/data/

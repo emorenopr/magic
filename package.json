@@ -11,6 +11,8 @@
     "prospectar:buscar": "node prospector/discover.js",
     "prospectar:auditar": "node prospector/audit.js",
     "prospectar:generar": "node prospector/generate.js",
-    "prospectar:cotizar": "node prospector/cotizar.js"
+    "prospectar:cotizar": "node prospector/cotizar.js",
+    "empresa:ceo": "node empresa/ceo.js",
+    "empresa:aprobaciones": "node empresa/aprobaciones.js"
   }
 }
