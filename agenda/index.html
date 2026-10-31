@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1218">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mi Agenda">
+  <title>Mi Agenda</title>
+  <!-- Para que los archivos carguen igual en /agenda y /agenda/ -->
+  <base href="/agenda/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Karla:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="agenda.css">
+</head>
+<body class="app-page">
+  <div id="gate" class="gate" hidden>
+    <div class="gate-card">
+      <h1>Mi Agenda</h1>
+      <p>Escribe tu contraseña para entrar.</p>
+      <form id="gateForm" class="gate-form">
+        <label for="gateInput" class="sr-only">Contraseña</label>
+        <input type="password" id="gateInput" placeholder="Contraseña" autocomplete="current-password" required>
+        <button type="submit" id="gateBtn">Entrar</button>
+      </form>
+      <p id="gateError" class="gate-error" hidden></p>
+    </div>
+  </div>
+
+  <div id="app" class="app" hidden>
+    <header class="topbar">
+      <h1 class="brand">Mi Agenda</h1>
+      <div class="topbar-actions">
+        <button type="button" class="ghost-btn" id="connectBtn">📺 TV y Claude</button>
+        <button type="button" class="ghost-btn" id="logoutBtn" aria-label="Salir">Salir</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="month-panel" aria-label="Calendario">
+        <div class="month-head">
+          <button type="button" class="nav-btn" id="prevBtn" aria-label="Mes anterior">‹</button>
+          <h2 id="monthTitle"></h2>
+          <button type="button" class="nav-btn" id="nextBtn" aria-label="Mes siguiente">›</button>
+          <button type="button" class="today-btn" id="todayBtn">Hoy</button>
+        </div>
+        <div class="weekdays" id="weekdays"></div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section class="day-panel" aria-live="polite">
+        <div class="day-head">
+          <h2 id="dayTitle"></h2>
+          <span class="day-count" id="dayCount"></span>
+        </div>
+
+        <form id="addForm" class="add-form">
+          <label for="addTitle" class="sr-only">Nueva tarea</label>
+          <input type="text" id="addTitle" placeholder="Anotar algo…" maxlength="200" autocomplete="off" required>
+          <label for="addTime" class="sr-only">Hora (opcional)</label>
+          <input type="time" id="addTime" title="Hora (opcional)">
+          <button type="submit">Agregar</button>
+        </form>
+
+        <ul class="item-list" id="dayList"></ul>
+
+        <div id="overdueBlock" class="overdue-block" hidden>
+          <h3>Atrasadas</h3>
+          <ul class="item-list" id="overdueList"></ul>
+        </div>
+      </section>
+    </main>
+
+    <section class="claude-panel" aria-label="Asistente Claude">
+      <div class="claude-log" id="claudeLog" hidden>
+        <button type="button" class="log-clear" id="claudeClear" aria-label="Cerrar conversación">✕</button>
+        <div id="claudeMessages"></div>
+      </div>
+      <form id="claudeForm" class="claude-form">
+        <span class="claude-mark" aria-hidden="true">✳</span>
+        <label for="claudeInput" class="sr-only">Dile a Claude</label>
+        <input type="text" id="claudeInput" maxlength="1000" autocomplete="off"
+          placeholder="Dile a Claude: “el viernes a las 3 dentista y comprar leche”">
+        <button type="submit" id="claudeBtn">Enviar</button>
+      </form>
+    </section>
+  </div>
+
+  <dialog id="connectDialog" class="connect-dialog">
+    <form method="dialog" class="dialog-close-row">
+      <button class="ghost-btn" aria-label="Cerrar">✕</button>
+    </form>
+
+    <h2>📺 Verla en la TV</h2>
+    <p>En el navegador de tu TV (o un Fire TV Stick / Chromecast con navegador) abre esta dirección y escribe tu contraseña una sola vez:</p>
+    <div class="copy-row">
+      <code id="tvShortUrl"></code>
+      <button type="button" class="copy-btn" data-copy="tvShortUrl">Copiar</button>
+    </div>
+    <p class="hint">Desde una computadora conectada a la TV, este link entra directo sin pedir contraseña:</p>
+    <div class="copy-row">
+      <code id="tvKeyUrl"></code>
+      <button type="button" class="copy-btn" data-copy="tvKeyUrl">Copiar</button>
+    </div>
+
+    <h2>✳ Usarla desde la app de Claude</h2>
+    <ol>
+      <li>En Claude ve a <strong>Configuración → Conectores → Agregar conector personalizado</strong>.</li>
+      <li>Ponle de nombre <strong>Mi Agenda</strong> y pega esta URL:</li>
+    </ol>
+    <div class="copy-row">
+      <code id="mcpUrl"></code>
+      <button type="button" class="copy-btn" data-copy="mcpUrl">Copiar</button>
+    </div>
+    <p class="hint">Luego en cualquier chat: “¿Qué tengo esta semana?” o “Anota para el martes llamar al banco”.
+      Estos links llevan tu contraseña: no los compartas.</p>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

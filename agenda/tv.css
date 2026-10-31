@@ -1,0 +1,389 @@
+/* Todo se mide en rem y el rem crece con el ancho de la pantalla,
+   así se ve igual en una TV de 32" que en una de 75". */
+html {
+  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 48px);
+}
+
+.tv-page {
+  overflow: hidden;
+  cursor: none;
+}
+
+.tv-page .gate {
+  cursor: auto;
+}
+
+.tv-page .gate-card {
+  width: min(32rem, 100%);
+}
+
+.tv {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem 3rem 1.4rem;
+  transition: transform 2s ease;
+}
+
+/* ---------- reloj ---------- */
+
+.tv-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.tv-clock {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 5.4rem;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tv-ampm {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
+
+.tv-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 1.7rem;
+  color: var(--muted);
+  line-height: 1.15;
+}
+
+.tv-weekday {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2.7rem;
+  color: var(--accent);
+}
+
+/* ---------- columnas ---------- */
+
+.tv-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  padding-top: 1.2rem;
+}
+
+.tv-today,
+.tv-week {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.tv-section-head h2 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.tv-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.tv-bar {
+  width: 9rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.tv-bar span {
+  display: block;
+  height: 100%;
+  background: var(--ok);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+/* ---------- hoy ---------- */
+
+.tv-today-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tv-group {
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0.8rem 0 0.4rem;
+}
+
+.tv-group:first-child {
+  margin-top: 0;
+}
+
+.tv-group.late {
+  color: var(--late);
+}
+
+.tv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tv-item {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  padding: 0.4rem 1rem;
+  background: var(--surface);
+  border-radius: 0.8rem;
+  border: 2px solid transparent;
+}
+
+.tv-time {
+  flex: none;
+  min-width: 6.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.tv-title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-box {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.4rem;
+  border: 0.18rem solid var(--faint);
+}
+
+.tv-item.next {
+  border-color: var(--accent);
+  background: rgba(242, 165, 65, 0.12);
+}
+
+.tv-badge {
+  flex: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.tv-item.past .tv-time,
+.tv-item.past .tv-title {
+  color: var(--muted);
+}
+
+.tv-item.done .tv-time,
+.tv-item.done .tv-title {
+  color: var(--faint);
+  text-decoration: line-through;
+  text-decoration-thickness: 0.12rem;
+}
+
+.tv-item.done .tv-box {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.tv-item.late .tv-box {
+  border-color: var(--late);
+}
+
+.tv-from {
+  flex: none;
+  font-size: 1.15rem;
+  color: var(--late);
+}
+
+.tv-more {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0 1rem;
+}
+
+.tv-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 2.4rem 2rem;
+  border: 2px dashed var(--line);
+  border-radius: 1rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.tv-empty small {
+  font-family: "Karla", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* ---------- próximos días ---------- */
+
+.tv-week-list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  overflow: hidden;
+}
+
+.tv-day {
+  flex: none;
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-radius: 0.8rem;
+}
+
+.tv-day.empty {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.tv-day-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.tv-day-name {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+.tv-day-num {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.tv-day ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tv-day li {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-day li b {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 0.2rem;
+}
+
+.tv-day li.done {
+  color: var(--faint);
+  text-decoration: line-through;
+}
+
+.tv-day li.done b {
+  color: var(--faint);
+}
+
+.tv-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--muted);
+  margin: 0 0.55rem 0.2rem 0.2rem;
+  vertical-align: middle;
+}
+
+.tv-day-more {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--surface-2);
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+}
+
+.tv-free {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--faint);
+}
+
+/* ---------- pie ---------- */
+
+.tv-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  font-size: 1.05rem;
+  color: var(--faint);
+}
+
+.tv-foot .offline {
+  color: var(--late);
+}
+
+.tv-foot-claude {
+  color: var(--muted);
+}

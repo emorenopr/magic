@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/tv", "destination": "/agenda/tv.html", "permanent": false }
+  ],
+  "functions": {
+    "api/agenda-claude.js": { "maxDuration": 60 }
+  }
+}

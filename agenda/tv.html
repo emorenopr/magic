@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f1218">
+  <title>Mi Agenda — TV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Karla:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="agenda.css">
+  <link rel="stylesheet" href="tv.css">
+</head>
+<body class="tv-page">
+  <div id="tvGate" class="gate" hidden>
+    <div class="gate-card">
+      <h1>Mi Agenda</h1>
+      <p>Escribe tu contraseña una vez y esta pantalla la recordará.</p>
+      <form id="tvGateForm" class="gate-form">
+        <label for="tvGateInput" class="sr-only">Contraseña</label>
+        <input type="password" id="tvGateInput" placeholder="Contraseña" autocomplete="current-password" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <p id="tvGateError" class="gate-error" hidden></p>
+    </div>
+  </div>
+
+  <div id="tv" class="tv" hidden>
+    <header class="tv-head">
+      <div class="tv-clock"><span id="tvTime"></span><span class="tv-ampm" id="tvAmPm"></span></div>
+      <div class="tv-date">
+        <span class="tv-weekday" id="tvWeekday"></span>
+        <span id="tvDate"></span>
+      </div>
+    </header>
+
+    <main class="tv-main">
+      <section class="tv-today">
+        <div class="tv-section-head">
+          <h2>Hoy</h2>
+          <div class="tv-progress" id="tvProgress" hidden>
+            <span id="tvProgressText"></span>
+            <span class="tv-bar"><span id="tvProgressBar"></span></span>
+          </div>
+        </div>
+        <div id="tvTodayBody" class="tv-today-body"></div>
+      </section>
+
+      <section class="tv-week">
+        <div class="tv-section-head"><h2>Próximos días</h2></div>
+        <div id="tvWeek" class="tv-week-list"></div>
+      </section>
+    </main>
+
+    <footer class="tv-foot">
+      <span id="tvStatus"></span>
+      <span class="tv-foot-claude">✳ Dile a Claude qué anotar y aparece aquí</span>
+    </footer>
+  </div>
+
+  <script src="shared.js"></script>
+  <script src="tv.js"></script>
+</body>
+</html>
